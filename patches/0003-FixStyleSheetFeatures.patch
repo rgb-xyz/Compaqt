@@ -1,0 +1,26 @@
+diff --git a/src/widgets/styles/qstylesheetstyle.cpp b/src/widgets/styles/qstylesheetstyle.cpp
+--- a/src/widgets/styles/qstylesheetstyle.cpp
++++ b/src/widgets/styles/qstylesheetstyle.cpp
+@@ -54,7 +54,9 @@
+ #if QT_CONFIG(itemviews)
+ #include <qheaderview.h>
+ #endif
++#if QT_CONFIG(style_windows)
+ #include <private/qwindowsstyle_p_p.h>
++#endif
+ #if QT_CONFIG(animation)
+ #include <private/qstyleanimation_p.h>
+ #endif
+diff --git a/src/widgets/styles/qstylesheetstyle_p.h b/src/widgets/styles/qstylesheetstyle_p.h
+--- a/src/widgets/styles/qstylesheetstyle_p.h
++++ b/src/widgets/styles/qstylesheetstyle_p.h
+@@ -5,7 +5,9 @@
+ #define QSTYLESHEETSTYLE_P_H
+ 
+ #include <QtWidgets/private/qtwidgetsglobal_p.h>
++#if QT_CONFIG(style_windows)
+ #include "private/qwindowsstyle_p.h"
++#endif
+ 
+ #ifndef QT_NO_STYLE_STYLESHEET
+ 

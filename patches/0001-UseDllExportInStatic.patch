@@ -1,0 +1,12 @@
+diff --git a/cmake/modulecppexports.h.in b/cmake/modulecppexports.h.in
+--- a/cmake/modulecppexports.h.in
++++ b/cmake/modulecppexports.h.in
+@@ -14,6 +14,8 @@
+ #  else
+ #    define Q_@module_define_infix@_EXPORT Q_DECL_IMPORT
+ #  endif
++#elif !defined(QT_BOOTSTRAPPED)
++#  define Q_@module_define_infix@_EXPORT Q_DECL_EXPORT
+ #else
+ #  define Q_@module_define_infix@_EXPORT
+ #endif
