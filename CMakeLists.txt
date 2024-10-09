@@ -124,7 +124,15 @@ list(APPEND CMAKE_PREFIX_PATH ${CQTBASE_BINARY_DIR})
 find_package(Qt6 COMPONENTS Widgets REQUIRED)
 
 add_library(Compaqt SHARED Compaqt.cpp)
+add_library(Compaqt::Compaqt ALIAS Compaqt)
 target_link_libraries(Compaqt PRIVATE Qt6::Widgets)
-get_target_property(QT_INCLUDES Qt6::Widgets INTERFACE_INCLUDE_DIRECTORIES)
-target_include_directories(Compaqt SYSTEM PUBLIC ${QT_INCLUDES})
-target_compile_definitions(Compaqt INTERFACE QT_SHARED)
+
+get_target_property(COMPILE_OPTIONS Qt6::Platform INTERFACE_COMPILE_OPTIONS)
+target_compile_options(Compaqt INTERFACE ${COMPILE_OPTIONS})
+target_compile_definitions(Compaqt INTERFACE QT_SHARED $<$<NOT:$<CONFIG:Debug>>:QT_NO_DEBUG>)
+target_include_directories(Compaqt INTERFACE
+    ${CQTBASE_BINARY_DIR}/include
+    ${CQTBASE_BINARY_DIR}/include/QtCore
+    ${CQTBASE_BINARY_DIR}/include/QtGui
+    ${CQTBASE_BINARY_DIR}/include/QtWidgets
+)
